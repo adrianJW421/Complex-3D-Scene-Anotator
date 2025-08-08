@@ -1,0 +1,279 @@
+/* START OF FILE style.css */
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+#controls {
+    width: 350px; /* 根据需要微调宽度 */
+    padding: 20px;
+    box-sizing: border-box; /* padding 和 border 包含在宽度内 */
+    overflow-y: auto; /* 如果内容过多则显示滚动条 */
+    border-right: 1px solid #ccc;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+#viewer {
+    flex-grow: 1; /* 占据剩余空间 */
+    position: relative; /* 用于内部绝对定位（如果需要） */
+    min-width: 0; /* 防止 flex item 溢出 */
+    background-color: #cccccc; /* 默认查看器背景色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#viewer canvas {
+    display: block; /* 移除 canvas 下方的空白 */
+    max-width: 100%; /* 确保 canvas 不会超出容器 */
+    max-height: 100%;
+}
+
+/* --- 通用控件样式 --- */
+#controls label,
+#controls button,
+#controls select,
+#controls textarea,
+#controls input[type="text"] {
+    display: block; /* 每个控件占一行 */
+    margin-bottom: 10px; /* 控件之间的垂直间距 */
+    width: 100%; /* 控件宽度占满容器 */
+    box-sizing: border-box; /* padding 和 border 包含在宽度内 */
+    padding: 8px; /* 控件内边距 */
+    border: 1px solid #ccc; /* 边框 */
+    border-radius: 3px; /* 轻微圆角 */
+    font-size: 1em; /* 保持字体大小一致 */
+}
+#controls select {
+     padding: 7px 8px; /* 微调 select 的内边距以适应下拉箭头 */
+}
+#controls textarea {
+     min-height: 80px; /* 文本区域最小高度 */
+     resize: vertical; /* 允许用户垂直调整大小 */
+     font-family: sans-serif; /* 确保字体一致 */
+}
+
+/* --- 标题和分隔线样式 --- */
+#controls h1, #controls h2, #controls h4 {
+    margin-top: 0; /* 移除默认的上边距 */
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 1px solid #eee; /* 标题下的分隔线 */
+    padding-bottom: 8px;
+}
+#controls h4 { /* 子标题样式 */
+     margin-top: 15px; /* 子标题与上方元素间距 */
+     margin-bottom: 10px;
+     color: #555;
+     font-size: 1.1em;
+     border-bottom: none; /* 移除双重边框 */
+}
+#controls hr { /* 分隔线样式 */
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+/* --- 视图控制样式 --- */
+#controls label[for="viewModeToggle"],
+#controls label[for="presetViewButtons"] { /* 视图控制标签加粗 */
+    font-weight: 600;
+    margin-bottom: 5px; /* 标签和控件间距缩小 */
+}
+#presetViewButtons { /* 预设视图按钮网格布局 */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3列均分布局 */
+    gap: 5px; /* 按钮间距 */
+    margin-bottom: 10px; /* 按钮组下方间距 */
+}
+#presetViewButtons button { /* 预设视图按钮样式 */
+    padding: 6px 8px; /* 按钮内边距 */
+    font-size: 0.9em;
+    text-align: center;
+    background-color: #e9ecef; /* 按钮背景色 */
+    border: 1px solid #ced4da;
+    color: #495057;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease; /* 悬停过渡效果 */
+}
+#presetViewButtons button:hover { /* 按钮悬停效果 */
+    background-color: #dee2e6;
+    border-color: #adb5bd;
+}
+/* --- End View Controls --- */
+
+
+/* --- 确认选择区域样式 --- */
+#confirmationSection {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin-top: 15px;
+    background-color: #f8f9fa; /* 浅背景色 */
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 轻微阴影 */
+}
+#confirmationSection h4 { /* 确认区标题 */
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+#confirmationSection p { /* 确认区文本 */
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    color: #444;
+}
+#confirmationSection p strong { /* 确认区高亮文本 */
+    color: #0056b3;
+    font-weight: 600;
+}
+#confirmationSection p u { /* "Clicked Object Info" 样式 */
+    text-decoration: none;
+    border-bottom: 1px dotted #888;
+    padding-bottom: 2px;
+    color: #333;
+    font-weight: 600;
+}
+#confirmationSection button { /* 确认区按钮 */
+    width: auto; /* 按钮宽度自适应内容 */
+    padding: 8px 15px;
+    margin-top: 15px; /* 按钮与上方内容间距 */
+    margin-right: 10px; /* 按钮之间间距 */
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+#confirmationSection button#confirmButton { background-color: #28a745; color: white; }
+#confirmationSection button#confirmButton:hover { background-color: #218838; }
+#confirmationSection button#cancelButton { background-color: #dc3545; color: white; }
+#confirmationSection button#cancelButton:hover { background-color: #c82333; }
+/* 已存在注释信息段落样式 */
+#existingAnnotationInfo {
+    color: #0056b3;
+    font-style: italic;
+    margin-bottom: 10px;
+    border: 1px dashed #a0cfff;
+    padding: 5px;
+    background-color: #e7f3fe;
+    border-radius: 3px; /* 轻微圆角 */
+    font-size: 0.85em; /* 稍小字体 */
+}
+
+
+/* --- 主标注区域样式 --- */
+#annotationSection {
+    margin-top: 25px; /* 与确认区域分隔 */
+}
+#annotationSection h2 { /* "Annotation" 标题 */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+/* “已选”信息框样式 */
+#annotationSection #info {
+    font-weight: normal;
+    margin-bottom: 15px;
+    min-height: 1.2em; /* 保证最小高度 */
+    padding: 10px;
+    border: 1px solid #c5d9ea; /* 边框颜色 */
+    background-color: #e7f3fe; /* 背景色 */
+    border-radius: 4px;
+    font-size: 0.95em;
+}
+#annotationSection #info strong { color: #1a5f9e; font-weight: 600;}
+
+/* --- 标注区域标签特定样式 --- */
+#annotationSection label[for="labelModifyInput"],
+#annotationSection label[for="queryInput"],
+#annotationSection label[for="regionSelect"] { /* <<< 添加新标签选择器 >>> */
+    font-weight: 600; /* 加粗 */
+    font-size: 0.95em;
+    margin-bottom: 5px; /* 标签和输入框间距缩小 */
+}
+/* 调整输入框下方间距 */
+#annotationSection input#labelModifyInput {
+    margin-bottom: 15px; /* 标签输入框和下方标签的间距 */
+}
+#annotationSection textarea#queryInput {
+    margin-bottom: 15px; /* 查询输入框和下方标签的间距 */
+}
+/* --- 新增区域下拉框样式 --- */
+#annotationSection select#regionSelect {
+    /* 继承通用 select 样式 */
+    margin-bottom: 15px; /* 下拉框和保存按钮的间距 */
+}
+#annotationSection select#regionSelect:disabled {
+    background-color: #e9ecef; /* 禁用时的背景色 */
+    cursor: not-allowed;
+}
+
+
+/* --- 保存按钮样式 --- */
+#annotationSection button#saveButton {
+    background-color: #007bff; /* 主题蓝色 */
+    color: white;
+    padding: 10px 15px; /* 按钮内边距 */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-weight: bold;
+    margin-top: 15px; /* <<< 确保与上方区域下拉框有间距 >>> */
+}
+#annotationSection button#saveButton:disabled { /* 禁用状态 */
+    background-color: #a0cfff;
+    cursor: not-allowed;
+}
+#annotationSection button#saveButton:not(:disabled):hover { /* 悬停状态 */
+    background-color: #0056b3;
+}
+/* 保存状态信息样式 */
+#saveStatus {
+    margin-top: 10px; /* 与保存按钮间距 */
+    font-weight: bold;
+    font-size: 0.9em;
+    min-height: 1.1em; /* 保证最小高度，防止布局跳动 */
+    color: green; /* 默认成功颜色 */
+}
+#saveStatus[style*="color: red"] { /* 错误状态颜色 (通过内联样式设置) */
+    color: red;
+}
+
+/* --- 加载和错误状态提示样式 --- */
+#loadingStatus, #errorStatus {
+    margin-top: 8px;
+    font-size: 0.9em;
+    padding: 5px 8px; /* 调整内边距 */
+    border-radius: 3px;
+    text-align: center; /* 居中显示 */
+}
+#loadingStatus { color: #856404; background-color: #fff3cd; border: 1px solid #ffeeba; }
+#errorStatus { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; }
+
+
+/* --- 响应式调整 (可选) --- */
+/* @media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        height: auto;
+    }
+    #controls {
+        width: 100%;
+        height: 40vh; / * 控制面板在小屏幕上的高度 * /
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+    }
+    #viewer {
+        height: 60vh; / * 查看器在小屏幕上的高度 * /
+    }
+} */
+
+/* END OF FILE style.css */

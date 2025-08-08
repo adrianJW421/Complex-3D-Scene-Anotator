@@ -1,0 +1,92 @@
+<!-- START OF FILE index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matterport 3DVG Annotator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="{{ url_for('static', filename='js/OrbitControls.js') }}"></script>
+</head>
+<body>
+<div id="controls">
+    <h1>Matterport 3DVG Annotator</h1>
+
+    <!-- Scene Selection -->
+    <label for="sceneSelector">Select Scene:</label>
+    <select id="sceneSelector">
+        <option value="">-- Select --</option>
+        {% for scene in scenes %}
+        <option value="{{ scene }}">{{ scene }}</option>
+        {% endfor %}
+    </select>
+    <button id="loadSceneButton">Load Scene</button>
+    <div id="loadingStatus" style="display: none;">Loading...</div>
+    <div id="errorStatus" style="display: none;"></div>
+    <hr>
+
+    <!-- View Controls Section -->
+    <h4>View Controls</h4>
+    <label for="viewModeToggle">View Mode:</label>
+    <select id="viewModeToggle">
+        <option value="front" selected>Standard (Front)</option>
+        <option value="back">Interior (Back)</option>
+        <option value="double">Both Sides</option>
+    </select>
+    <label style="margin-top: 15px;">Preset Views:</label>
+    <div id="presetViewButtons">
+        <button id="presetTopBtn">Top</button>
+        <button id="presetBottomBtn">Bottom</button>
+        <button id="presetFrontBtn">Front</button>
+        <button id="presetBackBtn">Back</button>
+        <button id="presetLeftBtn">Left</button>
+        <button id="presetRightBtn">Right</button>
+    </div>
+    <p style="font-size: 0.85em; color: #555; margin-top: 5px;">Keys: WASDQE=Move, Z/C=Turn, V/B=Look Up/Down, Shift=Fast, F=Focus</p>
+    <hr>
+
+    <!-- Confirmation Section -->
+    <div id="confirmationSection" style="display: none;">
+        <h4>Confirm Selection</h4>
+        <p id="existingAnnotationInfo" style="display: none; color: #0056b3; font-style: italic; margin-bottom: 10px; border: 1px dashed #a0cfff; padding: 5px; background-color: #e7f3fe;"></p>
+        <p><u>Clicked Object Info:</u></p>
+        <p>Instance ID: <strong id="pendingInstanceId"></strong></p>
+        <p>Category ID: <strong id="pendingCategoryId"></strong></p>
+        <p>Initial Label: <strong id="pendingLabel"></strong></p>
+        <p>Region: <strong id="pendingRegionLabel">N/A</strong> (<strong id="pendingRegionCode">-</strong>)</p>
+        <p style="margin-top: 15px;">Select this object for annotation?</p>
+        <button id="confirmButton">Yes, Select</button>
+        <button id="cancelButton">No, Cancel</button>
+    </div>
+
+    <!-- Main Annotation Section -->
+    <div id="annotationSection" style="display: none;">
+        <h2>Annotation</h2>
+        <div id="info">Selected: None</div>
+
+        <label for="labelModifyInput" style="margin-top: 15px;">Final Label:</label>
+        <input type="text" id="labelModifyInput" placeholder="Verify or enter correct label">
+
+        <label for="queryInput" style="margin-top: 15px;">Query:</label>
+        <textarea id="queryInput" rows="4" placeholder="Describe the selected object..."></textarea>
+
+        <label for="regionSelect" style="margin-top: 15px;">Corrected Region:</label>
+        <select id="regionSelect" disabled>
+            <option value="">-- Loading Regions --</option>
+            <!-- Options populated by JS -->
+        </select>
+
+        <button id="saveButton" disabled style="margin-top: 20px;">Save Annotation</button>
+        <div id="saveStatus"></div>
+    </div>
+
+</div> <!-- End Controls -->
+
+<div id="viewer"></div> <!-- End Viewer -->
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+<!-- END OF FILE index.html -->
