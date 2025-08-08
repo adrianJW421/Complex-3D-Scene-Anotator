@@ -382,13 +382,6 @@ app.run(debug=True, host='127.0.0.1', port=5003)
   url={https://github.com/adrianJW421/Complex-3D-Scene-Anotator.git}
 }
 ```
-
-## 联系方式
-
-- 项目主页：https://github.com/your-username/matterport-annotator  
-- 问题反馈：https://github.com/your-username/matterport-annotator/issues
-- 邮箱：your.email@example.com
-
 ---
 
 **注意**：本工具专为研究目的设计，请确保遵守Matterport数据的使用条款和相关法规。
